@@ -1,0 +1,236 @@
+=====================================================
+ACTÚA COMO: Desarrollador Full-Stack Senior especializado en:
+- Frontend: HTML5, CSS3 (Tailwind CSS o CSS puro modular), JavaScript (ES6+), React/Next.js (preferible) o PHP si se requiere backend clásico.
+- Backend/BaaS: Supabase (PostgreSQL, Auth, Storage, Realtime, Edge Functions).
+- Despliegue: Vercel (gratuito).
+- Diseño UI/UX profesional, responsive, accesible y editable.
+
+=====================================================
+🎯 OBJETIVO GENERAL
+=====================================================
+Crear una página web profesional, moderna, totalmente funcional y editable 
+para mi empresa de servicios tecnológicos. La plataforma debe permitirme:
+
+1. OFRECER MIS SERVICIOS de forma clara y atractiva:
+   - Asesoría tecnológica en línea.
+   - Soporte técnico remoto (vía AnyDesk, TeamViewer o similar).
+   - Desarrollo de software a la medida.
+   - Cualquier otro servicio que yo pueda agregar dinámicamente.
+
+2. VENDER SERVICIOS DE ASESORÍA Y SOPORTE EN LÍNEA:
+   - Catálogo de servicios con descripción, precio, duración y modalidad.
+   - Sistema de solicitud/contratación por parte del cliente.
+
+3. GESTIONAR UN CATÁLOGO DE PRODUCTOS EDITABLE (CRUD COMPLETO):
+   - Añadir, editar y eliminar productos desde un panel de administrador.
+   - Categorías principales:
+     • Sistemas / Software
+     • Cámaras de seguridad (CCTV)
+     • Accesorios / Hardware
+     • (Otras que yo pueda crear)
+   - Cada producto debe tener: nombre, descripción, precio, imagen, stock, categoría, estado (disponible/no disponible).
+
+4. SISTEMA DE AUTENTICACIÓN Y USUARIOS:
+   - Login para ADMINISTRADOR (solo yo) con acceso total al panel.
+   - Registro y login para CLIENTES (creación de cuentas).
+   - Roles diferenciados: admin, cliente, invitado.
+
+5. ALOJAMIENTO 100% GRATUITO:
+   - Frontend y backend desplegados en VERCEL.
+   - Base de datos, autenticación y almacenamiento de archivos en SUPABASE.
+
+=====================================================
+🏗️ ARQUITECTURA TECNOLÓGICA RECOMENDADA
+=====================================================
+- Framework Frontend: Next.js 14+ (App Router) con React.
+- Estilos: Tailwind CSS + componentes reutilizables.
+- Backend / Base de datos: Supabase (PostgreSQL).
+- Autenticación: Supabase Auth (email/password + OAuth opcional).
+- Almacenamiento de imágenes: Supabase Storage.
+- Formularios y validaciones: React Hook Form + Zod.
+- Despliegue: Vercel (integrado con GitHub).
+- Control de versiones: Git + GitHub.
+
+=====================================================
+🎨 DISEÑO Y UI/UX (PROFESIONAL Y EDITABLE)
+=====================================================
+La web debe tener un diseño:
+- Moderno, limpio, corporativo y tecnológico.
+- 100% responsive (móvil, tablet, desktop).
+- Con modo oscuro/claro (opcional pero recomendado).
+- Paleta de colores editable mediante variables CSS o configuración de Tailwind.
+- Tipografías profesionales (Google Fonts: Inter, Poppins o similar).
+- Animaciones suaves (Framer Motion o CSS transitions).
+- Accesibilidad WCAG 2.1 nivel AA.
+- SEO optimizado (meta tags, Open Graph, sitemap, robots.txt).
+- Carga rápida (optimización de imágenes, lazy loading).
+
+ZONAS EDITABLES POR EL ADMINISTRADOR:
+- Logo de la empresa (subir/cambiar desde el panel).
+- Colores principales (opcional, desde configuración).
+- Textos de la página de inicio, servicios y contacto.
+- Imágenes del carrusel/banner principal.
+- Información de contacto (teléfono, email, WhatsApp, redes sociales).
+
+=====================================================
+📄 ESTRUCTURA DE PÁGINAS (RUTAS)
+=====================================================
+PÚBLICAS (visibles para todos):
+1. / (Home) - Página principal con hero, servicios destacados, productos destacados, testimonios, CTA.
+2. /servicios - Lista completa de servicios ofrecidos.
+3. /servicios/[id] - Detalle de un servicio específico.
+4. /productos - Catálogo completo de productos con filtros por categoría.
+5. /productos/[id] - Detalle de un producto.
+6. /nosotros - Información de la empresa.
+7. /contacto - Formulario de contacto + datos + mapa.
+8. /login - Inicio de sesión.
+9. /registro - Crear cuenta de cliente.
+10. /recuperar-password - Recuperar contraseña.
+
+PRIVADAS (requieren autenticación):
+11. /dashboard - Panel principal del cliente (sus compras, soporte, perfil).
+12. /dashboard/perfil - Editar datos personales.
+13. /dashboard/mis-solicitudes - Historial de servicios contratados.
+
+ADMINISTRADOR (solo rol admin):
+14. /admin - Panel de administración (dashboard con estadísticas).
+15. /admin/servicios - CRUD de servicios.
+16. /admin/productos - CRUD de productos.
+17. /admin/categorias - CRUD de categorías.
+18. /admin/usuarios - Gestión de clientes registrados.
+19. /admin/pedidos - Gestión de solicitudes/ventas.
+20. /admin/configuracion - Logo, textos, datos de contacto, redes sociales.
+
+=====================================================
+🗄️ ESTRUCTURA DE BASE DE DATOS EN SUPABASE
+=====================================================
+Diseña las siguientes tablas en PostgreSQL (Supabase):
+
+- users (extensión de auth.users): id, email, role (admin/cliente), nombre, apellido, teléfono, dirección, avatar_url, created_at.
+- servicios: id, titulo, descripcion, precio, duracion, modalidad (online/presencial), imagen_url, activo, created_at.
+- categorias: id, nombre, descripcion, imagen_url, activo.
+- productos: id, nombre, descripcion, precio, stock, categoria_id (FK), imagen_url, activo, created_at.
+- pedidos: id, cliente_id (FK), tipo (servicio/producto), item_id, cantidad, total, estado (pendiente/procesado/completado/cancelado), fecha.
+- mensajes_contacto: id, nombre, email, telefono, mensaje, fecha, leido.
+- configuracion: id, clave, valor (para textos editables, logo, colores, etc.).
+
+Incluye:
+- Políticas RLS (Row Level Security) correctamente configuradas.
+- Índices para optimizar consultas.
+- Triggers para actualizar timestamps.
+
+=====================================================
+🔐 SEGURIDAD
+=====================================================
+- Contraseñas hasheadas (Supabase Auth lo maneja).
+- RLS en todas las tablas.
+- Validación de inputs en frontend y backend.
+- Protección contra CSRF, XSS, SQL Injection.
+- Variables de entorno para claves sensibles (.env.local).
+- Rate limiting en formularios de contacto y login.
+- Primer usuario admin creado manualmente o mediante seed.
+
+=====================================================
+🚀 FUNCIONALIDADES CLAVE
+=====================================================
+PANEL DE ADMINISTRADOR:
+- Subir/cambiar logo de la empresa.
+- CRUD completo de servicios, productos, categorías.
+- Subir imágenes a Supabase Storage.
+- Ver y gestionar pedidos/solicitudes.
+- Ver mensajes de contacto.
+- Estadísticas básicas (ventas, usuarios, productos más vistos).
+
+ÁREA DE CLIENTES:
+- Ver catálogo y servicios.
+- Solicitar servicios o productos.
+- Ver historial de solicitudes.
+- Editar perfil.
+
+PÚBLICO GENERAL:
+- Navegar catálogo y servicios.
+- Contactar por formulario, WhatsApp, email.
+- Registrarse e iniciar sesión.
+
+=====================================================
+📦 ENTREGABLES ESPERADOS (POR FASES)
+=====================================================
+Genera el proyecto por FASES, esperando mi confirmación antes de pasar a la siguiente. En cada fase entrega:
+
+FASE 1 — PLANIFICACIÓN Y ESTRUCTURA:
+- Árbol de carpetas completo del proyecto.
+- package.json con todas las dependencias.
+- Archivos de configuración (next.config.js, tailwind.config.js, .env.example).
+- Estructura de la base de datos en SQL lista para pegar en Supabase.
+
+FASE 2 — CONFIGURACIÓN INICIAL:
+- Código de conexión a Supabase (lib/supabase.js).
+- Middleware de autenticación.
+- Layout principal con header, footer y navegación.
+- Componentes reutilizables (Botón, Input, Card, Modal, Navbar).
+
+FASE 3 — PÁGINAS PÚBLICAS:
+- Home con hero, servicios destacados, productos destacados.
+- Páginas de servicios y productos (listado + detalle).
+- Páginas de nosotros y contacto.
+- Sistema de login y registro.
+
+FASE 4 — PANEL DE ADMINISTRADOR:
+- Dashboard con estadísticas.
+- CRUD de servicios, productos, categorías.
+- Gestión de usuarios y pedidos.
+- Subida de imágenes (logo, productos).
+- Sección de configuración editable.
+
+FASE 5 — ÁREA DE CLIENTES:
+- Dashboard del cliente.
+- Perfil editable.
+- Historial de solicitudes.
+
+FASE 6 — DESPLIEGUE:
+- Guía paso a paso para:
+  a) Crear cuenta en Supabase y configurar el proyecto.
+  b) Ejecutar el SQL en Supabase.
+  c) Obtener las claves (URL, anon key, service role key).
+  d) Crear cuenta en Vercel.
+  e) Subir el proyecto a GitHub.
+  f) Conectar GitHub con Vercel y desplegar.
+  g) Configurar variables de entorno en Vercel.
+  h) Crear el primer usuario administrador.
+
+=====================================================
+📝 INSTRUCCIONES DE RESPUESTA
+=====================================================
+1. Trabaja FASE POR FASE. No avances a la siguiente sin mi confirmación.
+2. En cada fase entrega el código COMPLETO y FUNCIONAL, no fragmentos.
+3. Incluye comentarios explicativos en el código.
+4. Usa buenas prácticas: componentes modulares, código limpio, nombrado claro.
+5. Prioriza que todo sea EDITABLE desde el panel de admin (no hardcodear textos ni imágenes).
+6. Al inicio de cada respuesta, indica claramente: "FASE X - [Nombre de la fase]".
+7. Si necesitas que tome decisiones de diseño, pregúntame antes.
+8. Al final de cada fase, dame una lista de verificación para confirmar que todo funciona antes de continuar.
+9. Usa Tailwind CSS para todos los estilos (no CSS suelto).
+10. Asegúrate de que el diseño sea profesional, moderno y apto para una empresa de tecnología.
+
+=====================================================
+🎨 PREFERENCIAS DE DISEÑO (AJUSTABLES)
+=====================================================
+- Colores principales: Azul tecnológico (#0066FF) + Blanco + Gris oscuro.
+- Tipografía: Inter o Poppins.
+- Estilo: Minimalista, corporativo, con acentos tecnológicos.
+- Iconografía: Lucide Icons o Heroicons.
+- Imágenes: placeholders profesionales (puedo reemplazarlas).
+
+=====================================================
+📌 PRIMERA ACCIÓN
+=====================================================
+Para comenzar, entrégame ÚNICAMENTE la FASE 1:
+- Árbol de carpetas completo.
+- package.json con dependencias.
+- Archivos de configuración esenciales.
+- Script SQL completo para crear todas las tablas, políticas RLS e índices en Supabase.
+- Archivo .env.example con las variables necesarias.
+
+Espera mi confirmación antes de pasar a la FASE 2.
+
+=====================================================
